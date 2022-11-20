@@ -41,16 +41,35 @@
                 <img src="https://assets.digitalocean.com/articles/docker_node_image/sammy.png" alt="Sammy the Shark">
             </p>
         </div>
-	<div class="col-lg-4">
+	    <div class="col-lg-4">
             <p>
-              <div class="caption">Your Sharks</div>
-                  <ul>
-                     <% sharks.forEach(function(shark) { %>
-                        <p>Name: <%= shark.name %></p>
-                        <p>Character: <%= shark.character %></p>
-                     <% }); %>
-                  </ul>
+                <div class="caption">Your Sharks</div>
             </p>
+            <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Character</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% sharks.forEach(function(shark) { %>
+                    <tr>
+                        <td><%= shark.name %></td>
+                        <td><%= shark.character %></td>
+                        <td>
+                            <a class="btn btn-danger" href="#">
+                                Del
+                            </a>
+                            <a class="btn btn-warning" href="#">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+            </table>
         </div>
     </div>
   </div>
