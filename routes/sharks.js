@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const shark = require('../controllers/sharks');
+const SharkModel = require('../models/sharks');
 
 router.get('/', function(req, res){
     shark.index(req,res);
@@ -13,5 +14,14 @@ router.post('/addshark', function(req, res) {
 router.get('/getshark', function(req, res) {
     shark.list(req,res);
 });
+
+router.get('/deleteshark/(:id)', function(req, res) {
+    shark.delete(req,res);
+});
+
+/* router.patch('/updateshark/:id', function(req, res) {
+    console.log("update route");
+    shark.update(req,res);
+}); */
 
 module.exports = router;
