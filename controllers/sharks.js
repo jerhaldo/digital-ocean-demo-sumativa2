@@ -35,17 +35,31 @@ exports.delete = async function (req, res) {
 		if (!sh) response.status(404).send("No shark found");
 		res.redirect('/sharks/getshark');
 	  } catch (error) {
-		response.status(500).send(error);
+		res.status(500).send(error);
 	  }
 };
 
-/* exports.update = async function (req, res) {
-	
+exports.getShark = async function (req, res) {
+	Shark.find({_id: req.params.id}).exec(function (err, shark) {
+		if (err) {
+			return res.send(500, err);
+		}
+		console.log(shark[0]);
+		res.render('editshark', {
+			shark: shark[0]
+		});
+	});
+};
+
+exports.update = async function (req, res) {
+	console.log(req.body);
 	try {
-		await Shark.findByIdAndUpdate(req.params.id, req.body);
-		await Shark.save();
-		response.send(res);
+		await Shark.findOneAndUpdate({_id: req.params.id}, {$set: req.body}, {useFindAndModify: false},
+			(err) => {
+				if (err) return res.status(404).send("No shark found");
+				res.redirect('/sharks/getshark');
+			});
 	} catch (error) {
-		response.status(500).send(error);
+		res.status(500).send(error);
 	}
-}; */
+};

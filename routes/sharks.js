@@ -19,9 +19,12 @@ router.get('/deleteshark/(:id)', function(req, res) {
     shark.delete(req,res);
 });
 
-/* router.patch('/updateshark/:id', function(req, res) {
-    console.log("update route");
+router.get('/editshark/(:id)', function(req, res) {
+    shark.getShark(req,res);
+});
+
+router.post('/updateshark/(:id)', function(req, res) {
     shark.update(req,res);
-}); */
+});
 
 module.exports = router;
